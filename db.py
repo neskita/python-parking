@@ -4,7 +4,7 @@ import parking;
 
 
 def getPlazasOcupadas():
-    sql = "select plaza from estacionamiento where salida = 'None';";
+    sql = "select plaza from estacionamiento where salida is NULL;";
     result = __queryTable__(sql);
     ocupadas = [];
     for r in result:
@@ -21,7 +21,7 @@ def query(matricula):
     return list[0];
 
 def update(estacionamiento):
-    sql = "update 'estacionamiento' set plaza=?, matricula=?, entrada=?, salida=?, coste=? where pk=?;" ;
+    sql = "update 'estacionamiento' set plaza=:1, matricula=:2, entrada=:3, salida=:4, coste=:5 where pk=:6;";
     parameters = (estacionamiento.plaza,
                   estacionamiento.matricula,
                   estacionamiento.horaEntrada,

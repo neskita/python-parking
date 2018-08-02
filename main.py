@@ -1,7 +1,12 @@
 import parking;
 from random import randint;
 from time import sleep
+from datetime import datetime;
+import db;
 
+#
+# est = parking.estacionamiento(pk=48, plaza=randint(0,100), matricula=22, horaEntrada=datetime.now(), horaSalida=datetime.now(), coste = 33)
+# db.update(est)
 
 matricula = "matricula" + str(randint(0,1000));
 parking.aparcar(matricula);
