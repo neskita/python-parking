@@ -1,0 +1,30 @@
+Software de gestionar plazas de parking
+
+Para usar el sistema de parking, el usuario debe de estar registrado.
+Tenemos un limite de plazas de parking (100 plazas).
+Los datos deben de ser guardados en una base de datos.
+Cuando un usuario quiera dejar su coche el sistema debe guardar la fecha/hora de entrada y salida.
+Al salir, se le informará del importe (El cobro no se tiene que realizar).
+
+El importe a pagar depende del tiempo:
+o	Entre 0 y 20 minutos: 1€.
+o	Entre 20 minutos y una hora: 1,5€
+o	Entre 1 hora y 24 horas: 1,5€ por hora.
+o	Más de 24 horas: 15€ por día.
+
+El usuario podrá hacer:
+1)	Dar de alta un usuario
+2)	Registrar entrada de un coche
+3)	Registrar salida de un coche y mostrar el importe a cobrar (Dato que hay que guardar).
+
+El administrador podrá hacer:
+1)	Dar de baja un usuario
+2)	Revisar el uso de las plazas
+3)	Ver el importe total del día, semana o mes.
+
+Se valorará aparte de lo descrito:
+-	Analisis del problema y la solucion ofrecida.
+-	Metodos de validacion.
+-	Aplicación a prueba de errores.
+-	Ofrecer la aplicación en varios idiomas.
+-	Ofrecer el precio en distintas monedas con el cambio en tiempo real (Conectandose a una web para obtener el dato).
