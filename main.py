@@ -12,4 +12,6 @@ matricula = "matricula" + str(randint(0,1000));
 parking.aparcar(matricula);
 sleep(2);
 estacionamiento = parking.sacarCoche(matricula);
-print(estacionamiento);
+print(estacionamiento.coste);
+
+"http://data.fixer.io/api/latest?access_key=b96a72bed66245c7dff0d19efb83b1ee"
