@@ -36,6 +36,14 @@ def getEstacionamientoDesde(inicio):
     list = __buildEstacionamientos__(result);
     return list;
 
+def getPlazasOcupadasYMatricula():
+    sql = "select plaza, matricula from estacionamiento where salida is NULL;";
+    result = __queryTable__(sql);
+    ocupadas = [];
+    for r in result:
+        ocupadas.append((int(r[0]), r[1]));
+    return ocupadas;
+
 def getPlazasOcupadas():
     sql = "select plaza from estacionamiento where salida is NULL;";
     result = __queryTable__(sql);

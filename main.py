@@ -1,6 +1,6 @@
 import currency
 import parking;
-from gui import imprimirPlazasLibres;
+from gui import imprimirPlazasLibres, imprimirPlazasOcupadasYCoches;
 from random import randint;
 from time import sleep
 
@@ -19,4 +19,6 @@ print(parking.verImporteSemana());
 print(parking.verImporteMes());
 
 imprimirPlazasLibres(parking.getPlazasDisponibles())
+imprimirPlazasOcupadasYCoches(parking.getPlazasOcupadasYMatricula())
+
 

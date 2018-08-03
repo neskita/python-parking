@@ -11,3 +11,8 @@ def imprimirPlazasLibres(disponibles):
         print(linePlazas);
         print(lineEstados);
         print();
+
+def imprimirPlazasOcupadasYCoches(ocupadas):
+    print("Plaza --> Matricula Coche")
+    for tupla in ocupadas:
+        print ("(" + str(tupla[0]) + ")  -->  " + tupla[1]);

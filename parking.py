@@ -73,6 +73,8 @@ def aparcar(matricula, plaza=None):
         return db.insertEstacionamiento(plaza, matricula);
     raise ValueError('Este coche ya esta aparcado. Necesita salir antes de volver a entrar.')
 
+def getPlazasOcupadasYMatricula():
+    return db.getPlazasOcupadasYMatricula();
 
 def getPlazasDisponibles():
     ocupadas = db.getPlazasOcupadas();
