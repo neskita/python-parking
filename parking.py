@@ -2,6 +2,14 @@ from datetime import date, datetime, timedelta;
 from random import randint;
 import db;
 
+class usuario():
+    def __init__(self, id, nombre, email, contrasena, matriculacoche):
+        self.id = id;
+        self.nombre = nombre;
+        self.email = email;
+        self.contrasena = contrasena;
+        self.matriculacoche = matriculacoche;
+
 class estacionamiento():
 
     def __init__(self, pk, plaza, matricula, horaEntrada, horaSalida, coste = None): #se podria aplicar una tarifa inicial

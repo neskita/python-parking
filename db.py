@@ -6,22 +6,30 @@ import parking;
 ########################################
 # Usuarios
 
-def insertEstacionamiento(plaza, matricula):
-    sql = "insert into 'estacionamiento' ( 'plaza', 'matricula', 'entrada', 'salida', 'coste') " \
-          "VALUES (?, ?, ?, ?, ?);";
-    parameters = (plaza,
-                  matricula,
-                  datetime.now(),
-                  None,
-                  None);
+def insertUsuario(id, nombre, email, contrasena, matriculacoche):
+    sql = "insert into 'usuarios' ( 'id', 'nombre', 'email', 'contrasena', 'matriculacoche') " \
+          "VALUES (?, ?, ?, ?);";
+    parameters = (id,
+                  nombre,
+                  email,
+                  contrasena,
+                  matriculacoche);
     __manageTable__(sql, parameters);
 
+def updateUsuarioMatriculaCoche(id, matriculacoche):
+    sql = "update 'usuarios' set matriculacoche=:0 where id=:1;";
+    parameters = (matriculacoche, id);
+    __manageTable__(sql, parameters);
+
+def updateUsuarioContrasena(id, contrasena):
+    sql = "update 'usuarios' set contrasena=:0 where id=:1;";
+    parameters = (contrasena, id);
+    __manageTable__(sql, parameters);
 
 ########################################
 # Estacionamientos
 
 def getEstacionamientoDesde(inicio):
-    #sql = 'select * from estacionamiento where entrada between "2018-08-02 20:52:00" AND "2018-08-02 20:53:00";'
     sql = 'select * from estacionamiento where entrada > ?;';
     parametros = (inicio,);
     result = __queryTable__(sql, parametros);
