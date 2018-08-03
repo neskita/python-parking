@@ -3,34 +3,10 @@ from datetime import datetime;
 import parking;
 
 
-def getPlazasOcupadas():
-    sql = "select plaza from estacionamiento where salida is NULL;";
-    result = __queryTable__(sql);
-    ocupadas = [];
-    for r in result:
-        ocupadas.append(int(r[0]));
-    return ocupadas;
+########################################
+# Usuarios
 
-
-def query(matricula):
-    sql = "select * from estacionamiento where matricula = '{0}';".format(matricula);
-    result = __queryTable__(sql);
-    list = __buildEstacionamientos__(result);
-    if not list:
-        return None;
-    return list[0];
-
-def update(estacionamiento):
-    sql = "update 'estacionamiento' set plaza=:1, matricula=:2, entrada=:3, salida=:4, coste=:5 where pk=:6;";
-    parameters = (estacionamiento.plaza,
-                  estacionamiento.matricula,
-                  estacionamiento.horaEntrada,
-                  estacionamiento.horaSalida,
-                  estacionamiento.coste,
-                  estacionamiento.pk);
-    __manageTable__(sql, parameters);
-
-def insert(plaza, matricula):
+def insertEstacionamiento(plaza, matricula):
     sql = "insert into 'estacionamiento' ( 'plaza', 'matricula', 'entrada', 'salida', 'coste') " \
           "VALUES (?, ?, ?, ?, ?);";
     parameters = (plaza,
@@ -40,7 +16,55 @@ def insert(plaza, matricula):
                   None);
     __manageTable__(sql, parameters);
 
-def queryAll():
+
+########################################
+# Estacionamientos
+
+def getEstacionamientoDesde(inicio):
+    #sql = 'select * from estacionamiento where entrada between "2018-08-02 20:52:00" AND "2018-08-02 20:53:00";'
+    sql = 'select * from estacionamiento where entrada > ?;';
+    parametros = (inicio,);
+    result = __queryTable__(sql, parametros);
+    list = __buildEstacionamientos__(result);
+    return list;
+
+def getPlazasOcupadas():
+    sql = "select plaza from estacionamiento where salida is NULL;";
+    result = __queryTable__(sql);
+    ocupadas = [];
+    for r in result:
+        ocupadas.append(int(r[0]));
+    return ocupadas;
+
+def queryEstacionamiento(matricula):
+    sql = "select * from estacionamiento where matricula = '{0}';".format(matricula);
+    result = __queryTable__(sql);
+    list = __buildEstacionamientos__(result);
+    if not list:
+        return None;
+    return list[0];
+
+def updateEstacionamiento(estacionamiento):
+    sql = "update 'estacionamiento' set plaza=:1, matricula=:2, entrada=:3, salida=:4, coste=:5 where pk=:6;";
+    parameters = (estacionamiento.plaza,
+                  estacionamiento.matricula,
+                  estacionamiento.horaEntrada,
+                  estacionamiento.horaSalida,
+                  estacionamiento.coste,
+                  estacionamiento.pk);
+    __manageTable__(sql, parameters);
+
+def insertEstacionamiento(plaza, matricula):
+    sql = "insert into 'estacionamiento' ( 'plaza', 'matricula', 'entrada', 'salida', 'coste') " \
+          "VALUES (?, ?, ?, ?, ?);";
+    parameters = (plaza,
+                  matricula,
+                  datetime.now(),
+                  None,
+                  None);
+    __manageTable__(sql, parameters);
+
+def queryAllEstacionamientos():
     sql = "select * from estacionamiento;";
     result = __queryTable__(sql);
     return __buildEstacionamientos__(result);
@@ -55,10 +79,10 @@ def __manageTable__ (query, parameters):
     con.close();
 
 
-def __queryTable__ (query):
+def __queryTable__ (query, parameters=()):
     con = sqlite3.connect("parking.db", detect_types=sqlite3.PARSE_DECLTYPES);
     c = con.cursor();
-    c.execute(query);
+    c.execute(query, parameters);
     result = c.fetchall();
     c.close();
     con.close();
@@ -68,5 +92,5 @@ def __queryTable__ (query):
 def __buildEstacionamientos__ (result):
     list = [];
     for r in result:
-        list.append(parking.estacionamiento(r[0], r[1], r[2], r[3], r[4]));
+        list.append(parking.estacionamiento(r[0], r[1], r[2], r[3], r[4], r[5]));
     return list;

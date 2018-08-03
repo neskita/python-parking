@@ -1,4 +1,4 @@
-from datetime import  datetime
+from datetime import date, datetime, timedelta;
 import db;
 
 class estacionamiento():
@@ -32,24 +32,50 @@ class estacionamiento():
             self.coste = 15 * timedelta.days;
         return self.coste;
 
+
 def sacarCoche(matricula):
-    estacionamiento = db.query(matricula);
+    estacionamiento = db.queryEstacionamiento(matricula);
     if estacionamiento is None:
         return None;
     estacionamiento.salir();
-    db.update(estacionamiento);
+    db.updateEstacionamiento(estacionamiento);
     return estacionamiento;
 
+
 def aparcar(matricula):
-    resultado = db.query(matricula);
+    resultado = db.queryEstacionamiento(matricula);
     if resultado is None:
         plazas = getPlazasDisponibles();
         if not plazas:
             return None;
-        return db.insert(plazas[0], matricula);
+        return db.insertEstacionamiento(plazas[0], matricula);
     raise ValueError('Este coche ya esta aparcado. Necesita salir antes de volver a entrar.')
+
 
 def getPlazasDisponibles():
     ocupadas = db.getPlazasOcupadas();
     disponibles = [ i for i in range(0,100) if i not in ocupadas]
     return disponibles;
+
+
+def verImporteMes():
+    firstDayMonth = date.today().replace(day=1);
+    return verImporteDesde(firstDayMonth)
+
+
+def verImporteSemana():
+    firstDayWeek = date.today() - timedelta(days=date.today().weekday());
+    return verImporteDesde(firstDayWeek);
+
+def verImporteHoy():
+    return verImporteDesde(date.today());
+
+
+def verImporteDesde(beginningDate):
+    estacionamientos = db.getEstacionamientoDesde(beginningDate);
+    return __sumarImportesCoste(estacionamientos);
+
+
+def __sumarImportesCoste(estacionamientos):
+    return sum([x.coste for x in estacionamientos if x.coste is not None]);
+
