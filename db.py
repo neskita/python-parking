@@ -26,6 +26,20 @@ def updateUsuarioContrasena(id, contrasena):
     parameters = (contrasena, id);
     __manageTable__(sql, parameters);
 
+def deleteUsuario(id):
+    sql = "delete from 'usuarios' where id=:1;";
+    parameters = (id);
+    __manageTable__(sql, parameters);
+
+def getUsuario(id):
+    sql = "select * from 'usuarios' where id=:1;";
+    parametros = (id);
+    result = __queryTable__(sql, parametros);
+    list = __buildUsers__(result);
+    if not list:
+        return None;
+    return list[0];
+
 ########################################
 # Estacionamientos
 
@@ -103,6 +117,13 @@ def __queryTable__ (query, parameters=()):
     c.close();
     con.close();
     return result;
+
+
+def __buildUsers__ (result):
+    list = [];
+    for r in result:
+        list.append(parking.usuario(r[0], r[1], r[2], r[3], r[4]));
+    return list;
 
 
 def __buildEstacionamientos__ (result):
