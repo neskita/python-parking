@@ -10,6 +10,9 @@ class usuario():
         self.contrasena = contrasena;
         self.matriculacoche = matriculacoche;
 
+    def __str__(self):
+        return "id [{0}] nombre [{1}] email [{2}] contrasena [{3}] matricula [{4}]".format(self.id, self.nombre, self.email, self.contrasena, self.matriculacoche)
+
 class estacionamiento():
 
     def __init__(self, pk, plaza, matricula, horaEntrada, horaSalida, coste = None): #se podria aplicar una tarifa inicial

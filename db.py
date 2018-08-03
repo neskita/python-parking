@@ -8,7 +8,7 @@ import parking;
 
 def insertUsuario(id, nombre, email, contrasena, matriculacoche):
     sql = "insert into 'usuarios' ( 'id', 'nombre', 'email', 'contrasena', 'matriculacoche') " \
-          "VALUES (?, ?, ?, ?);";
+          "VALUES (?, ?, ?, ?, ?);";
     parameters = (id,
                   nombre,
                   email,
@@ -32,9 +32,8 @@ def deleteUsuario(id):
     __manageTable__(sql, parameters);
 
 def getUsuario(id):
-    sql = "select * from 'usuarios' where id=:1;";
-    parametros = (id);
-    result = __queryTable__(sql, parametros);
+    sql = "select * from 'usuarios' where id='{0}';".format(id)
+    result = __queryTable__(sql);
     list = __buildUsers__(result);
     if not list:
         return None;
@@ -45,7 +44,7 @@ def getUsuario(id):
 
 def getEstacionamientoDesde(inicio):
     sql = 'select * from estacionamiento where entrada > ?;';
-    parametros = (inicio,);
+    parametros = (inicio);
     result = __queryTable__(sql, parametros);
     list = __buildEstacionamientos__(result);
     return list;
