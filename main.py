@@ -1,36 +1,17 @@
-import currency
-import parking;
-from gui import imprimirPlazasLibres, imprimirPlazasOcupadasYCoches;
-from random import randint;
-from time import sleep
-import db;
+import gui;
+import administracion as admin;
 
-matricula = "matricula" + str(randint(0,100));
-# parking.aparcar(matricula);
-#sleep(2);
-#estacionamiento = parking.sacarCoche(matricula);
-#print(estacionamiento.coste);
+seleccion = gui.mainMenu();
+seleccion = input("Por favor, elija que tipo de usuario es");
+usuario = input("Por favor inserte el id de usuario: ");
+contrasena = input("Por favor inserte la contrasena: ")
+if seleccion == 0:
+    id, admin = admin.logarUsuarioAdmin(usuario, contrasena);
+if seleccion == 1:
+    id, admin = admin.logarUsuario(usuario, contrasena)
 
-#
-# dolares = currency.getExchangeRate('USD');
-# print(dolares)
-#
-# print(parking.verImporteHoy());
-# print(parking.verImporteSemana());
-# print(parking.verImporteMes());
-#
-# imprimirPlazasLibres(parking.getPlazasDisponibles())
-# imprimirPlazasOcupadasYCoches(parking.getPlazasOcupadasYMatricula())
+//TODO while not authenticated
 
-# i = randint(0,1000);
-# db.insertUsuario(i, "nombre" + str(i), "email" + str(i), "contrasena" + str(i), matricula);
-# usuario = db.getUsuario(i)
-# print(usuario)
-# db.updateUsuarioContrasena(i, "contrasenanueva" + str(i));
-# usuario = db.getUsuario(i)
-# print(usuario)
-# db.updateUsuarioMatriculaCoche(i, "nuevamatricula" + str(i));
-# usuario = db.getUsuario(i)
-# print(usuario)
-# db.deleteUsuario(i);
-
+while True:
+    seleccion = gui.userMenu();
+    // add both users flow
