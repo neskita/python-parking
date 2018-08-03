@@ -27,9 +27,8 @@ def updateUsuarioContrasena(id, contrasena):
     __manageTable__(sql, parameters);
 
 def deleteUsuario(id):
-    sql = "delete from 'usuarios' where id=:1;";
-    parameters = (id);
-    __manageTable__(sql, parameters);
+    sql = "delete from 'usuarios' where id='{0}';".format(id)
+    __manageTable__(sql);
 
 def getUsuario(id):
     sql = "select * from 'usuarios' where id='{0}';".format(id)
@@ -99,7 +98,7 @@ def queryAllEstacionamientos():
     return __buildEstacionamientos__(result);
 
 
-def __manageTable__ (query, parameters):
+def __manageTable__ (query, parameters=()):
     con = sqlite3.connect("parking.db");
     c = con.cursor();
     c.execute(query, parameters);

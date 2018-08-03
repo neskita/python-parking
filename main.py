@@ -32,4 +32,5 @@ matricula = "matricula" + str(randint(0,100));
 # db.updateUsuarioMatriculaCoche(i, "nuevamatricula" + str(i));
 # usuario = db.getUsuario(i)
 # print(usuario)
+# db.deleteUsuario(i);
 
