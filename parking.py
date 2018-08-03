@@ -1,4 +1,5 @@
 from datetime import date, datetime, timedelta;
+from random import randint;
 import db;
 
 class estacionamiento():
@@ -41,14 +42,27 @@ def sacarCoche(matricula):
     db.updateEstacionamiento(estacionamiento);
     return estacionamiento;
 
-
 def aparcar(matricula):
+    plazas = getPlazasDisponibles();
+    if not plazas:
+        return None;
+    aparcar(matricula, plazas[randint(0,len(plazas)-1)]);
+
+def aparcar(matricula, plaza=None):
     resultado = db.queryEstacionamiento(matricula);
     if resultado is None:
-        plazas = getPlazasDisponibles();
-        if not plazas:
+        disponibles = getPlazasDisponibles();
+
+        if not disponibles:
             return None;
-        return db.insertEstacionamiento(plazas[0], matricula);
+
+        if plaza is None:
+            plaza = disponibles[randint(0,len(disponibles)-1)];
+
+        if plaza not in disponibles:
+            return None;
+
+        return db.insertEstacionamiento(plaza, matricula);
     raise ValueError('Este coche ya esta aparcado. Necesita salir antes de volver a entrar.')
 
 
