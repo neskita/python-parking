@@ -86,7 +86,7 @@ def inputDataUsuario():
            input("Introduzca el nombre: "),\
            input("Introduzca el email: "),\
            input("Introduzca la contrasena: "),\
-           input("Introduzca la matricula del coche");
+           input("Introduzca la matricula del coche: ");
 
 def menuForeignCurrency():
     return input("Especifique otra moneda si quiere mostrar el importe en moneda extranjera: ");

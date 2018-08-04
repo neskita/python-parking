@@ -17,6 +17,7 @@ def registerUser():
         loggedUser = admin.logar(usuario.upper(), contrasena.upper());
     if seleccion == 1:
         admin.altaUsuario(gui.inputDataUsuario());
+        loggedUser = (id, False);
 
     return loggedUser;
 
