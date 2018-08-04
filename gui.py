@@ -81,3 +81,13 @@ def imprimirListaUsuarios(usuarios):
         return;
     for usuario in usuarios:
         print(usuario);
+
+def inputDataUsuario():
+    return validateIntInput("Introduzca el ID: "),\
+           input("Introduzca el nombre: "),\
+           input("Introduzca el email: "),\
+           input("Introduzca la contrasena: "),\
+           input("Introduzca la matricula del coche");
+
+def menuForeignCurrency():
+    return input("Especifique otra moneda si quiere mostrar el imorte en moneda extranjera: ");

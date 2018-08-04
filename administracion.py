@@ -14,6 +14,11 @@ class usuario():
     def __str__(self):
         return "id [{0}] nombre [{1}] email [{2}] contrasena [{3}] matricula [{4}]".format(self.id, self.nombre, self.email, self.contrasena, self.matriculacoche)
 
+def getMatriculaDeUsuario(userId):
+    user = db.getUsuario(userId)
+    return user.matriculacoche;
+
+
 def logarUsuarioAdmin(usuario, contrasena):
     if usuario == USUARIO_ADMIN:
         if contrasena == PASS_ADMIN:

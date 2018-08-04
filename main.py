@@ -2,6 +2,7 @@ import sys;
 import gui;
 import administracion as admin;
 import parking;
+import currency;
 
 loggedUser = (); #id, admin
 
@@ -25,6 +26,7 @@ while True:
 
     while True:
         if loggedUser[1]:
+            #Admin User
             seleccion = gui.userAdmin();
 
             # "[0] Mostrar todos los usuarios"
@@ -65,17 +67,25 @@ while True:
                 break;
         else:
             # Parking User
-            # print("[0] Crear un usuario Nuevo")
-            # print("[1] Aparcar un coche en el parking")
-            # print("[2] Sacar un coche del parking")
-            # print("[3] Log out")
             seleccion = gui.userMenu();
+
+            #"[0] Crear un usuario Nuevo"
             if seleccion == 0:
-                coste = 0;
+                admin.altaUsuario(gui.inputDataUsuario());
+
+            #"[1] Aparcar coche en el parking"
             if seleccion == 1:
-                coste = 1;
+                coste = parking.aparcarMiCoche(loggedUser[0]);
+                crr = gui.menuForeignCurrency();
+                exchangeValue = currency.getExchangeRate(crr);
+                total = coste * exchangeValue;
+                print("El coste a pagar por el estacionamiento es: ", str(total), currency);
+
+            #"[2] Sacar coche del parking"
             if seleccion == 2:
-                coste = 2;
+                parking.sacarMiCoche(loggedUser[1]);
+
+            #"[3] Log out"
             if seleccion == 3:
                 loggedUser = ();
                 break;

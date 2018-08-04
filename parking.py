@@ -1,6 +1,7 @@
 from datetime import date, datetime, timedelta;
 from random import randint;
 import db;
+import administracion as admin;
 
 class estacionamiento():
 
@@ -34,6 +35,9 @@ class estacionamiento():
         return self.coste;
 
 
+def sacarMiCoche(userId):
+    sacarCoche(admin.getMatriculaDeUsuario(userId));
+
 def sacarCoche(matricula):
     estacionamiento = db.queryEstacionamiento(matricula);
     if estacionamiento is None:
@@ -41,6 +45,9 @@ def sacarCoche(matricula):
     estacionamiento.salir();
     db.updateEstacionamiento(estacionamiento);
     return estacionamiento;
+
+def aparcarMiCoche(userId):
+    aparcar(admin.getMatriculaDeUsuario(userId));
 
 def aparcar(matricula):
     plazas = getPlazasDisponibles();
