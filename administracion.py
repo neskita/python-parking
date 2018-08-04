@@ -27,3 +27,22 @@ def logarUsuario(usuario, contrasena):
         return usr.id, True;
 
     return None, False;
+
+def altaUsuario(id, nombre, email, contrasena, matriculacoche):
+    try:
+        db.insertUsuario(id, nombre, email, contrasena, matriculacoche);
+    except Exception as ex:
+        print("Ha habido un problema dando de alta al usuario" + str(ex));
+
+def bajaUsuario(id):
+    try:
+        db.deleteUsuario(id);
+    except Exception as ex:
+        print("Ha habido un problema dando de baja al usuario [" + id + "]" + str(ex));
+
+
+def queryUsuarios():
+    try:
+        db.que(id);
+    except Exception as ex:
+        print("Ha habido un problema dando de baja al usuario [" + id + "]" + str(ex));

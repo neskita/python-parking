@@ -38,6 +38,11 @@ def getUsuario(id):
         return None;
     return list[0];
 
+def queryAllUsuarios():
+    sql = "select * from 'usuarios';";
+    result = __queryTable__(sql);
+    return __buildUsers__(result);
+
 ########################################
 # Estacionamientos
 
