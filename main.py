@@ -13,10 +13,10 @@ def registerUser():
         sys.exit(0)
 
     if seleccion == 0:
-        usuario, contrasena = gui.inputDataUsuario();
+        usuario, contrasena = gui.inputForUser();
         loggedUser = admin.logarUsuarioAdmin(usuario, contrasena);
     if seleccion == 1:
-        usuario, contrasena = gui.inputDataUsuario();
+        usuario, contrasena = gui.inputForUser();
         loggedUser = admin.logarUsuario(usuario, contrasena)
     if seleccion == 2:
         admin.altaUsuario(gui.inputDataUsuario());
@@ -60,7 +60,7 @@ while True:
                     print("El importe recaudado hoy es: " + str(parking.verImporteHoy()) + "€");
                 if importesSeleccion == 1:
                     print("El importe recaudado esta semana es: " + str(parking.verImporteSemana()) + "€");
-                if importesSeleccion == 1:
+                if importesSeleccion == 2:
                     print("El importe recaudado este mes es: " + str(parking.verImporteMes()) + "€");
 
             # "[4] Log out"

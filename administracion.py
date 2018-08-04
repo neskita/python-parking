@@ -48,6 +48,6 @@ def bajaUsuario(id):
 
 def queryUsuarios():
     try:
-        db.que(id);
+        return db.queryAllUsuarios();
     except Exception as ex:
-        print("Ha habido un problema dando de baja al usuario [" + id + "]" + str(ex));
+        print("Ha habido un problema seleccionando todos los usuarios" + str(ex));

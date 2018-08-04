@@ -1,6 +1,7 @@
 import sqlite3;
 from datetime import datetime;
 import parking;
+import administracion as admin;
 
 
 ########################################
@@ -48,7 +49,7 @@ def queryAllUsuarios():
 
 def getEstacionamientoDesde(inicio):
     sql = 'select * from estacionamiento where entrada > ?;';
-    parametros = (inicio);
+    parametros = (inicio,);
     result = __queryTable__(sql, parametros);
     list = __buildEstacionamientos__(result);
     return list;
@@ -125,7 +126,7 @@ def __queryTable__ (query, parameters=()):
 def __buildUsers__ (result):
     list = [];
     for r in result:
-        list.append(parking.usuario(r[0], r[1], r[2], r[3], r[4]));
+        list.append(admin.usuario(r[0], r[1], r[2], r[3], r[4]));
     return list;
 
 
