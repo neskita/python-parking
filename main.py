@@ -89,7 +89,7 @@ while True:
                     crr = gui.menuForeignCurrency();
                     exchangeValue = currency.getExchangeRate(crr.upper());
                     total = coste * exchangeValue;
-                    print("El coste a pagar por el estacionamiento es: ", str(total), crr if crr == '' else "€");
+                    print("El coste a pagar por el estacionamiento es: ", str(total), crr if crr != '' else "€");
                 except ValueError as e:
                     print(e);
 
