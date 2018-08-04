@@ -3,16 +3,16 @@
 def mainMenu():
     print("[0] Soy un admin user")
     print("[1] Soy un usuario del parking")
-    print("[2] Salir")
-    return __getSeleccion("Por favor, elija una opcion: ", 2);
+    print("[2] Soy un usuario nuevo")
+    print("[3] Salir")
+    return __getSeleccion("Por favor, elija una opcion: ", 3);
 
 
 def userMenu():
-    print("[0] Crear un usuario Nuevo")
-    print("[1] Aparcar un coche en el parking")
-    print("[2] Sacar un coche del parking")
-    print("[3] Log out")
-    return __getSeleccion("Por favor, que accion desea realizar? ", 3);
+    print("[0] Aparcar un coche en el parking")
+    print("[1] Sacar un coche del parking")
+    print("[2] Log out")
+    return __getSeleccion("Por favor, que accion desea realizar? ", 2);
 
 
 def userAdmin():
@@ -91,3 +91,7 @@ def inputDataUsuario():
 
 def menuForeignCurrency():
     return input("Especifique otra moneda si quiere mostrar el imorte en moneda extranjera: ");
+
+def inputForUser():
+    return input("Por favor inserte el id de usuario: "),\
+           input("Por favor inserte la contrasena: ");

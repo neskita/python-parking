@@ -9,15 +9,17 @@ loggedUser = (); #id, admin
 def registerUser():
     seleccion = gui.mainMenu();
 
-    if seleccion == 2:
+    if seleccion == 3:
         sys.exit(0)
 
-    usuario = input("Por favor inserte el id de usuario: ");
-    contrasena = input("Por favor inserte la contrasena: ")
     if seleccion == 0:
+        usuario, contrasena = gui.inputDataUsuario();
         loggedUser = admin.logarUsuarioAdmin(usuario, contrasena);
     if seleccion == 1:
+        usuario, contrasena = gui.inputDataUsuario();
         loggedUser = admin.logarUsuario(usuario, contrasena)
+    if seleccion == 2:
+        admin.altaUsuario(gui.inputDataUsuario());
 
     return loggedUser;
 
@@ -69,23 +71,19 @@ while True:
             # Parking User
             seleccion = gui.userMenu();
 
-            #"[0] Crear un usuario Nuevo"
+            #"[0] Aparcar coche en el parking"
             if seleccion == 0:
-                admin.altaUsuario(gui.inputDataUsuario());
-
-            #"[1] Aparcar coche en el parking"
-            if seleccion == 1:
                 coste = parking.aparcarMiCoche(loggedUser[0]);
                 crr = gui.menuForeignCurrency();
                 exchangeValue = currency.getExchangeRate(crr);
                 total = coste * exchangeValue;
                 print("El coste a pagar por el estacionamiento es: ", str(total), currency);
 
-            #"[2] Sacar coche del parking"
-            if seleccion == 2:
+            #"[1] Sacar coche del parking"
+            if seleccion == 1:
                 parking.sacarMiCoche(loggedUser[1]);
 
-            #"[3] Log out"
-            if seleccion == 3:
+            #"[2] Log out"
+            if seleccion == 2:
                 loggedUser = ();
                 break;
