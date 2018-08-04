@@ -70,8 +70,8 @@ def getPlazasOcupadas():
         ocupadas.append(int(r[0]));
     return ocupadas;
 
-def queryEstacionamiento(matricula):
-    sql = "select * from estacionamiento where matricula = '{0}';".format(matricula);
+def queryEstacionamientoActual(matricula):
+    sql = "select * from estacionamiento where matricula = '{0}' and salida is NULL;".format(matricula);
     result = __queryTable__(sql);
     list = __buildEstacionamientos__(result);
     if not list:

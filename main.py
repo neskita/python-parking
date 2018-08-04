@@ -9,22 +9,22 @@ loggedUser = (); #id, admin
 def registerUser():
     seleccion = gui.mainMenu();
 
-    if seleccion == 3:
+    if seleccion == 2:
         sys.exit(0)
 
     if seleccion == 0:
         usuario, contrasena = gui.inputForUser();
-        loggedUser = admin.logarUsuarioAdmin(usuario, contrasena);
+        loggedUser = admin.logar(usuario.upper(), contrasena.upper());
     if seleccion == 1:
-        usuario, contrasena = gui.inputForUser();
-        loggedUser = admin.logarUsuario(usuario, contrasena)
-    if seleccion == 2:
         admin.altaUsuario(gui.inputDataUsuario());
 
     return loggedUser;
 
 while True:
     loggedUser = registerUser();
+
+    if loggedUser[0] is None:
+        continue;
 
     while True:
         if loggedUser[1]:
@@ -73,15 +73,25 @@ while True:
 
             #"[0] Aparcar coche en el parking"
             if seleccion == 0:
-                coste = parking.aparcarMiCoche(loggedUser[0]);
-                crr = gui.menuForeignCurrency();
-                exchangeValue = currency.getExchangeRate(crr);
-                total = coste * exchangeValue;
-                print("El coste a pagar por el estacionamiento es: ", str(total), currency);
+                try:
+                    plaza = parking.aparcarMiCoche(loggedUser[0]);
+                    if plaza is None:
+                        print ("Lo sentimos pero no quedan plazas en el parking: ");
+                        continue;
+                    print ("El coche esta aparcado en la plaza: " + str(plaza));
+                except ValueError as e:
+                    print(e);
 
             #"[1] Sacar coche del parking"
             if seleccion == 1:
-                parking.sacarMiCoche(loggedUser[1]);
+                try:
+                    coste = parking.sacarMiCoche(loggedUser[0]);
+                    crr = gui.menuForeignCurrency();
+                    exchangeValue = currency.getExchangeRate(crr.upper());
+                    total = coste * exchangeValue;
+                    print("El coste a pagar por el estacionamiento es: ", str(total), crr if crr == '' else "€");
+                except ValueError as e:
+                    print(e);
 
             #"[2] Log out"
             if seleccion == 2:

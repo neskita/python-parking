@@ -1,11 +1,10 @@
 
 
 def mainMenu():
-    print("[0] Soy un admin user")
-    print("[1] Soy un usuario del parking")
-    print("[2] Soy un usuario nuevo")
-    print("[3] Salir")
-    return __getSeleccion("Por favor, elija una opcion: ", 3);
+    print("[0] Soy un usuario registrado")
+    print("[1] Soy un usuario nuevo")
+    print("[2] Salir")
+    return __getSeleccion("Por favor, elija una opcion: ", 2);
 
 
 def userMenu():
@@ -90,7 +89,7 @@ def inputDataUsuario():
            input("Introduzca la matricula del coche");
 
 def menuForeignCurrency():
-    return input("Especifique otra moneda si quiere mostrar el imorte en moneda extranjera: ");
+    return input("Especifique otra moneda si quiere mostrar el importe en moneda extranjera: ");
 
 def inputForUser():
     return input("Por favor inserte el id de usuario: "),\

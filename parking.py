@@ -36,28 +36,22 @@ class estacionamiento():
 
 
 def sacarMiCoche(userId):
-    sacarCoche(admin.getMatriculaDeUsuario(userId));
+    return sacarCoche(admin.getMatriculaDeUsuario(userId));
 
 def sacarCoche(matricula):
-    estacionamiento = db.queryEstacionamiento(matricula);
+    estacionamiento = db.queryEstacionamientoActual(matricula);
     if estacionamiento is None:
-        return None;
+        raise ValueError('Este coche NO esta aparcado aqui')
     estacionamiento.salir();
     db.updateEstacionamiento(estacionamiento);
-    return estacionamiento;
+    return estacionamiento.coste;
 
 def aparcarMiCoche(userId):
-    aparcar(admin.getMatriculaDeUsuario(userId));
-
-def aparcar(matricula):
-    plazas = getPlazasDisponibles();
-    if not plazas:
-        return None;
-    aparcar(matricula, plazas[randint(0,len(plazas)-1)]);
+    return aparcar(admin.getMatriculaDeUsuario(userId));
 
 def aparcar(matricula, plaza=None):
-    resultado = db.queryEstacionamiento(matricula);
-    if resultado is None:
+    resultado = db.queryEstacionamientoActual(matricula);
+    if resultado is None or resultado.horaSalida is not None:
         disponibles = getPlazasDisponibles();
 
         if not disponibles:
@@ -69,7 +63,8 @@ def aparcar(matricula, plaza=None):
         if plaza not in disponibles:
             return None;
 
-        return db.insertEstacionamiento(plaza, matricula);
+        db.insertEstacionamiento(plaza, matricula);
+        return plaza;
     raise ValueError('Este coche ya esta aparcado. Necesita salir antes de volver a entrar.')
 
 def getPlazasOcupadasYMatricula():

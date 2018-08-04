@@ -1,7 +1,7 @@
 import db;
 
-USUARIO_ADMIN = 'root';
-PASS_ADMIN = 'root';
+USUARIO_ADMIN = 'ROOT';
+PASS_ADMIN = 'ROOT';
 
 class usuario():
     def __init__(self, id, nombre, email, contrasena, matriculacoche):
@@ -19,17 +19,18 @@ def getMatriculaDeUsuario(userId):
     return user.matriculacoche;
 
 
-def logarUsuarioAdmin(usuario, contrasena):
+def logar(usuario, contrasena):
     if usuario == USUARIO_ADMIN:
         if contrasena == PASS_ADMIN:
-            return 0, True;
+            return USUARIO_ADMIN, True;
+    return logarUsuario(usuario, contrasena);
 
 def logarUsuario(usuario, contrasena):
     usr = db.getUsuario(usuario);
     if usr is None:
         return None, False;
-    if usr.contrasena == contrasena:
-        return usr.id, True;
+    if usr.contrasena.upper() == contrasena:
+        return usr.id, False;
 
     return None, False;
 
